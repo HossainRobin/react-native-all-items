@@ -5,52 +5,52 @@ import {
   Button,
   Text,
   FlatList,
+  ScrollView,
+  SectionList,
 } from "react-native";
 
 const HomeScreen = () => {
   const user = [
     {
       id: 1,
-      name: "robin",
+      name: "one",
+      data: ["1", "2", "3"],
     },
     {
       id: 2,
-      name: "robin",
+      name: "two",
+      data: ["1", "2", "3"],
     },
     {
       id: 3,
-      name: "robin",
+      name: "three",
+      data: ["1", "2", "3"],
     },
   ];
   return (
     <View style={{ marginTop: 50 }}>
-      <ActivityIndicator color={"green"} size={"large"} />
-      <Button
-        title="Click here"
-        color={"green"}
-        onPress={() => alert("Button clicked")}
-        // disabled
-      />
-      <FlatList
-        data={user}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => {
-          return (
-            <View
-              style={{
-                backgroundColor: "#ddd",
-                padding: 15,
-                margin: 10,
-                borderRadius: 5,
-              }}
-            >
-              <Text style={{ fontSize: 22 }}>{item.name}</Text>
-            </View>
-          );
-        }}
+      <SectionList
+        showsVerticalScrollIndicator={false}
+        sections={user}
+        renderSectionHeader={({ section: { name } }) => (
+          <Text style={{ fontSize: 30, color: "green", marginLeft: 20 }}>
+            {name}
+          </Text>
+        )}
+        renderItem={({ item }) => <Text style={styles.gridBox}>{item}</Text>}
       />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  gridBox: {
+    fontSize: 20,
+    backgroundColor: "green",
+    height: 100,
+    width: 100,
+    margin: 10,
+  },
+});
 
 export default HomeScreen;
